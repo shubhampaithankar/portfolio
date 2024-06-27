@@ -15,7 +15,7 @@ export default function Home() {
             <div className="container mx-auto h-full">
                 <div className="flex flex-col items-center justify-between xl:flex-row xl:pb-24 xl:pt-8">
                     <div className="text-center xl:text-left">
-                        <span className="text-xl">Full Stack Enginner</span>
+                        <span className="text-xl">Full Stack Engineer</span>
                         <h1 className="h1 mb-6">
                             Hello! I am
                             <br />
