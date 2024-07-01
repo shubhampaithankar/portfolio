@@ -3,6 +3,7 @@
 import Link from 'next/link'
 
 import { motion } from 'framer-motion'
+import CountUp from 'react-countup'
 
 import { Button } from '@/components/ui/button'
 import { FiDownload } from 'react-icons/fi'
@@ -14,18 +15,16 @@ export default function Home() {
         <section className="h-full">
             <div className="container mx-auto h-full">
                 <div className="flex flex-col items-center justify-between xl:flex-row xl:pb-24 xl:pt-8">
-                    <div className="text-center xl:text-left">
-                        <span className="text-xl">Full Stack Engineer</span>
+                    <div className="order-2 text-center xl:order-none xl:text-left">
+                        <span className="text-xl">Software Engineer</span>
                         <h1 className="h1 mb-6">
                             Hello! I am
                             <br />
                             <span className="text-accent">Shubham Paithankar</span>
                         </h1>
                         <p className="mb-8 max-w-[500px] text-white/80">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod molestias
-                            eum sed nemo corrupti voluptates illo iusto debitis officiis dolorum, et
-                            totam consectetur laborum ipsum aperiam quidem consequuntur deleniti
-                            praesentium!
+                            I am full stack software engineer excelling in JavaScript. I am
+                            proficient in both frontend and backend languages and technologies.
                         </p>
                         <div className="flex flex-col items-center gap-8 xl:flex-row">
                             <Button
@@ -46,11 +45,12 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className="order-1 mb-8 xl:order-none xl:mb-8">
                         <Photo />
                     </div>
                 </div>
             </div>
+            <Stats />
         </section>
     )
 }
@@ -106,11 +106,85 @@ const Photo = () => {
                             ease: 'easeInOut',
                         },
                     }}
-                    className="h-[298px] w-[298px] mix-blend-lighten xl:h-[498px] xl:w-[498px]"
+                    className="absolute h-[298px] w-[298px] mix-blend-lighten xl:h-[498px] xl:w-[498px]"
                 >
                     {/* <Image src="" priority quality={100} fill alt="" className="object-contain" /> */}
                 </motion.div>
+                <motion.svg
+                    className="h-[300px] w-[300px] xl:h-[506px] xl:w-[506px]"
+                    fill="transparent"
+                    viewBox="0 0 506 506"
+                    xmlns="https://www.w3.org/2000/svg"
+                >
+                    <motion.circle
+                        cx="253"
+                        cy="253"
+                        r="250"
+                        stroke="#00ff99"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        initial={{
+                            strokeDasharray: '24 10 0 0',
+                        }}
+                        animate={{
+                            strokeDasharray: ['15 120 25 25', '16 25 92 72', '4 250 22 22'],
+                            rotate: [120, 360],
+                        }}
+                        transition={{
+                            duration: 20,
+                            repeat: Infinity,
+                            repeatType: 'reverse',
+                        }}
+                    />
+                </motion.svg>
             </motion.div>
         </div>
+    )
+}
+
+const stats = [
+    {
+        num: 1,
+        text: 'Year of Experience',
+    },
+    {
+        num: 2,
+        text: 'Projects',
+    },
+    {
+        num: 8,
+        text: 'Technolgies',
+    },
+]
+
+const Stats = () => {
+    return (
+        <section className="pb-12 pt-4 xl:pb-0 xl:pt-0">
+            <div className="container mx-auto">
+                <div className="mx-auto flex max-w-[80vw] flex-wrap gap-6 xl:max-w-none">
+                    {stats.map((item, index) => {
+                        return (
+                            <div
+                                key={index}
+                                className="flex flex-1 items-center justify-center gap-4 xl:justify-start"
+                            >
+                                <CountUp
+                                    end={item.num}
+                                    duration={5}
+                                    delay={2}
+                                    className="text-4xl font-extrabold xl:text-6xl"
+                                />
+                                <p
+                                    className={`${item.text.length < 15 ? 'max-w-[100px]' : 'max-w-[150px]'} leading-snug text-white/80`}
+                                >
+                                    {item.text}
+                                </p>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+        </section>
     )
 }
