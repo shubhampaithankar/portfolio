@@ -16,8 +16,8 @@ export default function Home() {
                             <span className="text-accent">Shubham Paithankar</span>
                         </h1>
                         <p className="mb-8 max-w-[500px] text-white/80">
-                            I am full-stack software engineer excelling in JavaScript. I am
-                            proficient in both frontend and backend languages and technologies.
+                            I am a full-stack software engineer specializing in JavaScript, with
+                            proficiency in both frontend and backend technologies.
                         </p>
                         <div className="flex flex-col items-center gap-8 xl:flex-row">
                             <Button
