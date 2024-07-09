@@ -19,14 +19,14 @@ const links = [
         name: 'services',
         path: '/services',
     },
-    {
-        name: 'resume',
-        path: '/resume',
-    },
-    {
-        name: 'work',
-        path: '/work',
-    },
+    // {
+    //     name: 'resume',
+    //     path: '/resume',
+    // },
+    // {
+    //     name: 'work',
+    //     path: '/work',
+    // },
     {
         name: 'contact',
         path: '/contact',
@@ -81,7 +81,7 @@ const MobileNav = () => {
     return (
         <Sheet>
             <SheetTrigger className="flex items-center justify-center">
-                <CiMenuFries className="text-accent" />
+                <CiMenuFries className="text-[28px] text-accent" />
             </SheetTrigger>
             <SheetContent className="flex flex-col">
                 <div className="mb-40 mt-32 text-center text-2xl">
