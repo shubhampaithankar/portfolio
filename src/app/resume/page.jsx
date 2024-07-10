@@ -60,8 +60,8 @@ export default function Resume() {
                     onChange={(e) => setCurrentTab(e.target.value)}
                 >
                     <TabsList>
-                        {resume &&
-                            Object.keys(resume).map((field, index) => {
+                        {dummyData &&
+                            Object.keys(dummyData).map((field, index) => {
                                 return (
                                     <TabsTrigger key={index} className="capitalize" value={field}>
                                         {field}
@@ -70,40 +70,45 @@ export default function Resume() {
                             })}
                     </TabsList>
                     <div className="min-h-[70vh] w-full">
-                        <TabsContent value="experience" className="w-full">
+                        <Switch value={currentTab}>
                             {/* experience */}
-                            <div className="flex flex-col gap-[30px] text-center">
-                                <h3 className="text-4xl font-bold"></h3>
-                                <p className="mx-auto max-w-[600px] text-white/60 xl:mx-0"></p>
-                                <ScrollArea className="h-[400px]">
-                                    <ul className="grid grid-cols-1 gap-[30px] lg:grid-cols-2">
-                                        {false &&
-                                            [].map((item, index) => {
-                                                return (
-                                                    <li
-                                                        key={index}
-                                                        className="flex h-[184px] flex-col items-center justify-center gap-1 rounded-xl bg-[#232329] px-10 py-6 lg:items-start"
-                                                    >
-                                                        {/* duration<span>{}</span> *  */}
-                                                        <h3 className="min-h-[60px] max-w-[260px] text-center text-xl lg:text-left">
-                                                            {item.position}
-                                                        </h3>
-                                                        <div className="flex items-center gap-3">
-                                                            <span className="h-[6px] w-[6px]"></span>
-                                                            <p className="text-white/60">
-                                                                {item.organisation}
-                                                            </p>
-                                                        </div>
-                                                    </li>
-                                                )
-                                            })}
-                                    </ul>
-                                </ScrollArea>
-                            </div>
-                        </TabsContent>
+                            <TabsContent value="experience" className="w-full">
+                                <div className="flex flex-col gap-[30px] text-center">
+                                    <h3 className="text-4xl font-bold"></h3>
+                                    <p className="mx-auto max-w-[600px] text-white/60 xl:mx-0"></p>
+                                    <ScrollArea className="h-[400px]">
+                                        <ul className="grid grid-cols-1 gap-[30px] lg:grid-cols-2">
+                                            {false &&
+                                                [].map((item, index) => {
+                                                    return (
+                                                        <li
+                                                            key={index}
+                                                            className="flex h-[184px] flex-col items-center justify-center gap-1 rounded-xl bg-[#232329] px-10 py-6 lg:items-start"
+                                                        >
+                                                            {/* duration<span>{}</span> *  */}
+                                                            <h3 className="min-h-[60px] max-w-[260px] text-center text-xl lg:text-left">
+                                                                {item.position}
+                                                            </h3>
+                                                            <div className="flex items-center gap-3">
+                                                                <span className="h-[6px] w-[6px]"></span>
+                                                                <p className="text-white/60">
+                                                                    {item.organisation}
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                    )
+                                                })}
+                                        </ul>
+                                    </ScrollArea>
+                                </div>
+                            </TabsContent>
+                            {/* projects */}
+                        </Switch>
                     </div>
                 </Tabs>
             </div>
         </motion.div>
     )
 }
+
+const Switch = ({ value, children }) => children.find((child) => child.props.value === value)
