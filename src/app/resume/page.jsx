@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, Children } from 'react'
+import { useState, useEffect } from 'react'
 
 import { motion } from 'framer-motion'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -32,8 +32,8 @@ export default function Resume() {
         // if (!response.ok) throw new Error(`API request failed with status ${response.status}`)
         // const data = await response.json()
         // const resumeData = data.documents[0].data
-        // const resumeData = dummyData
-        // setResume(resumeData)
+        const resumeData = dummyData
+        setResume(resumeData)
     }
 
     useEffect(() => {
@@ -76,10 +76,15 @@ export default function Resume() {
                         <div className="min-h-[70vh] w-full">
                             {/* experience */}
                             <TabsContent value="employment_history" className="w-full">
-                                <div className="flex flex-col gap-[30px] text-center">
-                                    <h3 className="text-4xl font-bold">Professional Experience</h3>
-                                    <p className="mx-auto max-w-[600px] text-white/60 xl:mx-0"></p>
-                                    <ScrollArea className="h-[400px]">
+                                <div className="flex flex-col gap-[30px]">
+                                    <div className="flex flex-col gap-[30px] text-center xl:text-left">
+                                        <h3 className="text-4xl font-bold">Experience</h3>
+                                        <p className="mx-auto max-w-[600px] text-white/60 xl:mx-0">
+                                            My professioanl experience that includes full-time
+                                            employment, internships and freelancing.
+                                        </p>
+                                    </div>
+                                    <ScrollArea className="h-[600px]">
                                         <ul className="grid grid-cols-1 gap-[30px] lg:grid-cols-2">
                                             {resume.employment_history?.map((item, index) => (
                                                 <li
@@ -105,7 +110,7 @@ export default function Resume() {
                                                         {item.job_title}
                                                     </h3>
                                                     <div className="flex items-center gap-3">
-                                                        <span className="h-[6px] w-[6px]"></span>
+                                                        <span className="h-[6px] w-[6px] rounded bg-accent"></span>
                                                         <p className="text-white/60">
                                                             {item.employer}
                                                         </p>
@@ -124,16 +129,21 @@ export default function Resume() {
                             <TabsContent value="skills" className="w-full">
                                 <div className="flex flex-col gap-[30px]">
                                     <div className="flex flex-col gap-[30px] text-center xl:text-left">
-                                        <h3 className="text-4xl font-bold"></h3>
-                                        <p className="mx-auto max-w-[600px] text-white/60 xl:mx-0"></p>
+                                        <h3 className="text-4xl font-bold">Skills</h3>
+                                        <p className="mx-auto max-w-[600px] text-white/60 xl:mx-0">
+                                            I currently use the following languages, tools and
+                                            technologies.
+                                        </p>
                                     </div>
-                                    <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 xl:gap-[30px]">
-                                        {resume.skills?.map((skill, index) => (
-                                            <li key={index}>
-                                                <IconTooltip skill={skill} />
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <ScrollArea className="h-[600px]">
+                                        <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 xl:gap-[30px]">
+                                            {resume.skills?.map((skill, index) => (
+                                                <li key={index}>
+                                                    <IconTooltip skill={skill} />
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </ScrollArea>
                                 </div>
                             </TabsContent>
                         </div>
@@ -151,10 +161,70 @@ const IconTooltip = ({ skill }) => {
     useEffect(() => {
         const importIcon = async () => {
             try {
-                const { [`Fa${capitalize(description)}`]: ImportedIcon } = await import(
-                    `react-icons/fa`
-                )
-                setIconComponent(() => ImportedIcon)
+                const name = capitalize(skillIcons[description]) || capitalize(description)
+                let FaIcon, TbIcon, TbBrandIcon, SiIcon
+
+                // Attempt to import FaIcon
+                try {
+                    const FaModule = await import(`react-icons/fa`)
+                    const iconName = `Fa${name}`
+                    FaIcon = FaModule[iconName]
+                } catch (error) {
+                    console.warn('FaIcon not found:', error)
+                }
+
+                if (FaIcon) {
+                    // console.log(`Icon found for ${name} as ${Object.keys({ FaIcon })[0]}`)
+                    setIconComponent(() => FaIcon)
+                    return
+                }
+
+                // Attempt to import TbIcon
+                const TbModule = await import(`react-icons/tb`)
+                try {
+                    const iconName = `Tb${name}`
+                    TbIcon = TbModule[iconName]
+                } catch (error) {
+                    console.warn('TbIcon not found:', error)
+                }
+
+                if (TbIcon) {
+                    // console.log(`Icon found for ${name} as ${Object.keys({ TbIcon })[0]}`)
+                    setIconComponent(() => TbIcon)
+                    return
+                }
+
+                try {
+                    const iconName = `TbBrand${name}`
+                    TbBrandIcon = TbModule[iconName]
+                } catch (error) {
+                    console.warn('TbBrandIcon not found:', error)
+                }
+
+                if (TbBrandIcon) {
+                    // console.log(`Icon found for ${name} as ${Object.keys({ TbBrandIcon })[0]}`)
+                    setIconComponent(() => TbBrandIcon)
+                    return
+                }
+
+                // Attempt to import SiIcon
+                try {
+                    const iconName = `Si${name}`
+                    const SiModule = await import(`react-icons/si`)
+                    SiIcon = SiModule[iconName]
+                } catch (error) {
+                    console.warn('SiIcon not found:', error)
+                }
+
+                if (SiIcon) {
+                    // console.log(`Icon found for ${name} as ${Object.keys({ SiIcon })[0]}`)
+                    setIconComponent(() => SiIcon)
+                    return
+                }
+
+                // If no icon is found
+                console.log(`No icon found for ${name}`)
+                setIconComponent(null)
             } catch (error) {
                 console.error('Error loading icon:', error)
                 setIconComponent(null)
@@ -167,11 +237,9 @@ const IconTooltip = ({ skill }) => {
     return (
         <TooltipProvider delayDuration={100}>
             <Tooltip>
-                <TooltipTrigger className="group flex h-[150px] w-full items-center justify-center rounded-xl bg-[#232329]">
-                    <div
-                        className={`${IconComponent ? 'text-6xl' : 'text-2xl'} transition-all duration-300 group-hover:text-accent`}
-                    >
-                        {IconComponent ? <IconComponent /> : description}
+                <TooltipTrigger className="group flex h-[125px] w-full items-center justify-center rounded-xl bg-[#232329]">
+                    <div className={`text-6xl transition-all duration-300 group-hover:text-accent`}>
+                        {IconComponent ? <IconComponent /> : null}
                     </div>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -188,4 +256,34 @@ const fields = {
     employment_history: 'experience',
     projects: 'projects',
     skills: 'skills',
+}
+
+const skillIcons = {
+    HTML: 'HTML5',
+    CSS: 'CSS3',
+    JavaScript: 'JavaScript',
+    TypeScript: 'TypeScript',
+    Node: 'Node',
+    Java: 'Java',
+    'VS Code': 'Vscode',
+    Eclipse: 'Intellijidea', // si
+    Postman: 'Postman',
+    Git: 'Git',
+    Jira: 'Jira',
+    Trello: 'Trello',
+    React: 'React',
+    Angular: 'Angular',
+    Bootstrap: 'Bootstrap',
+    Tailwind: 'Tailwind',
+    Vite: 'Vite',
+    Next: 'Nextjs',
+    Express: 'Express', // si
+    Nest: 'Nestjs', // si
+    Spring: 'Spring', //si
+    'REST API': 'api',
+    MySQL: 'MySQL',
+    MongoDB: 'MongoDB',
+    Linux: 'Linux',
+    Docker: 'Docker',
+    'CI/CD': 'Infinity',
 }
