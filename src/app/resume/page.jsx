@@ -5,7 +5,8 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+
+import { IconTooltip } from '@/components/resume'
 
 export default function Resume() {
     const [resume, setResume] = useState({})
@@ -32,8 +33,8 @@ export default function Resume() {
         // if (!response.ok) throw new Error(`API request failed with status ${response.status}`)
         // const data = await response.json()
         // const resumeData = data.documents[0].data
-        const resumeData = dummyData
-        setResume(resumeData)
+        // const resumeData = dummyData
+        // setResume(resumeData)
     }
 
     useEffect(() => {
@@ -154,136 +155,8 @@ export default function Resume() {
     )
 }
 
-const IconTooltip = ({ skill }) => {
-    const { description } = skill
-    const [IconComponent, setIconComponent] = useState(null)
-
-    useEffect(() => {
-        const importIcon = async () => {
-            try {
-                const name = capitalize(skillIcons[description]) || capitalize(description)
-                let FaIcon, TbIcon, TbBrandIcon, SiIcon
-
-                // Attempt to import FaIcon
-                try {
-                    const FaModule = await import(`react-icons/fa`)
-                    const iconName = `Fa${name}`
-                    FaIcon = FaModule[iconName]
-                } catch (error) {
-                    console.warn('FaIcon not found:', error)
-                }
-
-                if (FaIcon) {
-                    // console.log(`Icon found for ${name} as ${Object.keys({ FaIcon })[0]}`)
-                    setIconComponent(() => FaIcon)
-                    return
-                }
-
-                // Attempt to import TbIcon
-                const TbModule = await import(`react-icons/tb`)
-                try {
-                    const iconName = `Tb${name}`
-                    TbIcon = TbModule[iconName]
-                } catch (error) {
-                    console.warn('TbIcon not found:', error)
-                }
-
-                if (TbIcon) {
-                    // console.log(`Icon found for ${name} as ${Object.keys({ TbIcon })[0]}`)
-                    setIconComponent(() => TbIcon)
-                    return
-                }
-
-                try {
-                    const iconName = `TbBrand${name}`
-                    TbBrandIcon = TbModule[iconName]
-                } catch (error) {
-                    console.warn('TbBrandIcon not found:', error)
-                }
-
-                if (TbBrandIcon) {
-                    // console.log(`Icon found for ${name} as ${Object.keys({ TbBrandIcon })[0]}`)
-                    setIconComponent(() => TbBrandIcon)
-                    return
-                }
-
-                // Attempt to import SiIcon
-                try {
-                    const iconName = `Si${name}`
-                    const SiModule = await import(`react-icons/si`)
-                    SiIcon = SiModule[iconName]
-                } catch (error) {
-                    console.warn('SiIcon not found:', error)
-                }
-
-                if (SiIcon) {
-                    // console.log(`Icon found for ${name} as ${Object.keys({ SiIcon })[0]}`)
-                    setIconComponent(() => SiIcon)
-                    return
-                }
-
-                // If no icon is found
-                console.log(`No icon found for ${name}`)
-                setIconComponent(null)
-            } catch (error) {
-                console.error('Error loading icon:', error)
-                setIconComponent(null)
-            }
-        }
-
-        importIcon()
-    }, [description])
-
-    return (
-        <TooltipProvider delayDuration={100}>
-            <Tooltip>
-                <TooltipTrigger className="group flex h-[125px] w-full items-center justify-center rounded-xl bg-[#232329]">
-                    <div className={`text-6xl transition-all duration-300 group-hover:text-accent`}>
-                        {IconComponent ? <IconComponent /> : null}
-                    </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                    <p className="capitalize">{description}</p>
-                </TooltipContent>
-            </Tooltip>
-        </TooltipProvider>
-    )
-}
-
-const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase()
-
 const fields = {
     employment_history: 'experience',
     projects: 'projects',
     skills: 'skills',
-}
-
-const skillIcons = {
-    HTML: 'HTML5',
-    CSS: 'CSS3',
-    JavaScript: 'JavaScript',
-    TypeScript: 'TypeScript',
-    Node: 'Node',
-    Java: 'Java',
-    'VS Code': 'Vscode',
-    Eclipse: 'Intellijidea', // si
-    Postman: 'Postman',
-    Git: 'Git',
-    Jira: 'Jira',
-    Trello: 'Trello',
-    React: 'React',
-    Angular: 'Angular',
-    Bootstrap: 'Bootstrap',
-    Tailwind: 'Tailwind',
-    Vite: 'Vite',
-    Next: 'Nextjs',
-    Express: 'Express', // si
-    Nest: 'Nestjs', // si
-    Spring: 'Spring', //si
-    'REST API': 'api',
-    MySQL: 'MySQL',
-    MongoDB: 'MongoDB',
-    Linux: 'Linux',
-    Docker: 'Docker',
-    'CI/CD': 'Infinity',
 }
