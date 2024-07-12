@@ -2,4 +2,6 @@ import Header from './header'
 import PageTranstion from './pagetranstion'
 import StairTransition from './stairtransition'
 
-export { Header, PageTranstion, StairTransition }
+import MotionDiv from './motiondiv'
+
+export { Header, PageTranstion, StairTransition, MotionDiv }
