@@ -76,8 +76,8 @@ jobs:
             - name: Build with Next.js
               run: ${{ steps.detect-package-manager.outputs.runner }} next build
               env:
-                  ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-                  EXTRACTOR_ID: ${{ secrets.EXTRACTOR_ID }}
+                  NEXT_PUBLIC_ACCESS_TOKEN: ${{ secrets.NEXT_PUBLIC_ACCESS_TOKEN }}
+                  NEXT_PUBLIC_EXTRACTOR_ID: ${{ secrets.NEXT_PUBLIC_EXTRACTOR_ID }}
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
               with:
