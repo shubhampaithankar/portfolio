@@ -73,11 +73,17 @@ jobs:
                       ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
             - name: Install dependencies
               run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+            - name: Create env file
+              run: |
+                  touch .env
+                  echo "${{secrets.ACCESS_TOKEN}}" > .env
+                  echo "${{secrets.EXTRACTOR_ID}}" > .env
+                  cat .env
             - name: Build with Next.js
               run: ${{ steps.detect-package-manager.outputs.runner }} next build
-              env:
-                  NEXT_PUBLIC_ACCESS_TOKEN: ${{ secrets.NEXT_PUBLIC_ACCESS_TOKEN }}
-                  NEXT_PUBLIC_EXTRACTOR_ID: ${{ secrets.NEXT_PUBLIC_EXTRACTOR_ID }}
+              # env:
+              #     NEXT_PUBLIC_ACCESS_TOKEN: ${{ secrets.NEXT_PUBLIC_ACCESS_TOKEN }}
+              #     NEXT_PUBLIC_EXTRACTOR_ID: ${{ secrets.NEXT_PUBLIC_EXTRACTOR_ID }}
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
               with:
