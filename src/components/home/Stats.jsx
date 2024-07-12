@@ -16,8 +16,6 @@ export default function Stats() {
 
     if (!stats) return null
 
-    console.log(stats)
-
     return (
         <section className="pb-12 pt-4 xl:pb-0 xl:pt-0">
             <div className="container mx-auto">
@@ -63,7 +61,6 @@ async function getStats() {
             score,
         }
     } catch (error) {
-        console.error('Error fetching stats:', error)
         return null
     }
 }

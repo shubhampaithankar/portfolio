@@ -1,10 +1,8 @@
-'use client'
-
 import React from 'react'
 import Link from 'next/link'
 import { BsArrowDownRight } from 'react-icons/bs'
 
-import { motion } from 'framer-motion'
+import { MotionDiv } from '@/components'
 
 export const services = [
     {
@@ -31,20 +29,7 @@ export default function Services() {
     return (
         <section className="flex min-h-[80vh] flex-col justify-center py-12 xl:py-6">
             <div className="container mx-auto">
-                <motion.div
-                    initial={{
-                        opacity: 0,
-                    }}
-                    animate={{
-                        opacity: 1,
-                        transition: {
-                            delay: 2.4,
-                            duration: 0.4,
-                            ease: 'easeIn',
-                        },
-                    }}
-                    className="grid grid-cols-1 gap-[60px] md:grid-cols-2"
-                >
+                <MotionDiv classes="grid grid-cols-1 gap-[60px] md:grid-cols-2">
                     {services.map((service, index) => {
                         return (
                             <div
@@ -70,7 +55,7 @@ export default function Services() {
                             </div>
                         )
                     })}
-                </motion.div>
+                </MotionDiv>
             </div>
         </section>
     )

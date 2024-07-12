@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -17,9 +15,8 @@ import {
 
 import { FaMapMarkedAlt, FaEnvelope } from 'react-icons/fa'
 
-import { motion } from 'framer-motion'
-
 import { services } from '../services/page'
+import { MotionDiv } from '@/components'
 
 const info = [
     {
@@ -36,18 +33,7 @@ const info = [
 
 export default function Contact() {
     return (
-        <motion.section
-            initial={{ opacity: 0 }}
-            animate={{
-                opacity: 1,
-                transition: {
-                    delay: 2.4,
-                    duration: 0.4,
-                    ease: 'easeIn',
-                },
-            }}
-            className="py-4"
-        >
+        <MotionDiv classes="py-4">
             <div className="container mx-auto">
                 <div className="flex flex-col gap-[30px] xl:flex-row">
                     <div className="order-2 xl:order-none xl:w-[54%]">
@@ -100,6 +86,6 @@ export default function Contact() {
                     </div>
                 </div>
             </div>
-        </motion.section>
+        </MotionDiv>
     )
 }
