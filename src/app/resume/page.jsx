@@ -1,59 +1,39 @@
-'use client'
-
-import { useState, useEffect } from 'react'
-
-import { motion } from 'framer-motion'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ScrollArea } from '@/components/ui/scroll-area'
-
 import { IconTooltip } from '@/components/resume'
+import { MotionDiv } from '@/components'
 
-export default function Resume() {
-    const [resume, setResume] = useState({})
+const fields = {
+    employment_history: 'experience',
+    projects: 'projects',
+    skills: 'skills',
+}
 
-    const fetchResumeAsJSON = async () => {
-        const RESUME_URL = 'https://shubhampaithankar.github.io/resume/resume.pdf'
-        const API_URL = 'https://worke.formextractorai.com/v2/extract'
-        // const response = await fetch(API_URL, {
-        //     method: 'POST',
-        //     headers: {
-        //         accept: 'application/json:',
-        //         'X-WORKER-EXTRACTOR-ID': '',
-        //         'X-WORKER-IMAGE-URL': RESUME_URL,
-        //         'X-WORKER-ENCODING': 'raw',
-        //         'X-WORKER-PDF-DPI': '150',
-        //         'X-WORKER-ASYNC': 'false',
-        //         'X-WORKER-AUTO-ADJUST-IMAGE-SIZE': 'true',
-        //         'X-WORKER-PROCESSING-MODE': 'per-page',
-        //         'content-type': 'image/*',
-        //         'X-WORKER-TOKEN': '',
-        //     },
-        //     cache: 'force-cache',
-        // })
-        // if (!response.ok) throw new Error(`API request failed with status ${response.status}`)
-        // const data = await response.json()
-        // const resumeData = data.documents[0].data
-        // const resumeData = dummyData
-        // setResume(resumeData)
-    }
-
-    useEffect(() => {
-        fetchResumeAsJSON()
-    }, [])
-
+export default async function Resume() {
+    const RESUME_URL = 'https://shubhampaithankar.github.io/resume/resume.pdf'
+    const API_URL = 'https://worker.formextractorai.com/v2/extract'
+    const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+            accept: 'application/json:',
+            'X-WORKER-EXTRACTOR-ID': `${process.env.EXTRACTOR_ID}`,
+            'X-WORKER-IMAGE-URL': RESUME_URL,
+            'X-WORKER-ENCODING': 'raw',
+            'X-WORKER-PDF-DPI': '150',
+            'X-WORKER-ASYNC': 'false',
+            'X-WORKER-AUTO-ADJUST-IMAGE-SIZE': 'true',
+            'X-WORKER-PROCESSING-MODE': 'per-page',
+            'content-type': 'image/*',
+            'X-WORKER-TOKEN': `${process.env.ACCESS_TOKEN}`,
+        },
+        cache: 'force-cache',
+    })
+    if (!response.ok) throw new Error(`API request failed with status ${response.status}`)
+    const data = await response.json()
+    const resume = data.documents[0].data
+    // const resume = dummyData
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{
-                opacity: 1,
-                transition: {
-                    delay: 2.4,
-                    duration: 0.4,
-                    ease: 'easeIn',
-                },
-            }}
-            className="flex min-h-[80vh] items-center justify-center py-12 xl:py-0"
-        >
+        <MotionDiv classes='flex min-h-[80vh] items-center justify-center py-12 xl:py-0"'>
             <div className="container mx-auto">
                 {resume && (
                     <Tabs
@@ -151,12 +131,6 @@ export default function Resume() {
                     </Tabs>
                 )}
             </div>
-        </motion.div>
+        </MotionDiv>
     )
-}
-
-const fields = {
-    employment_history: 'experience',
-    projects: 'projects',
-    skills: 'skills',
 }
