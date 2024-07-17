@@ -6,21 +6,23 @@ import { MotionDiv } from '@/components'
 
 export const services = [
     {
-        num: '01',
-        title: 'Web Development',
-        desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab voluptas iure sequi commodi nam blanditiis exercitationem quibusdam vitae quas excepturi nihil nobis quisquam, minima quo maiores, unde distinctio animi iste.',
+        title: 'Website Development',
+        desc: 'Specialized in creating responsive, user-friendly, and visually appealing websites using the latest web technologies. Experienced with HTML, CSS, JavaScript, and various frameworks like React and Angular to build dynamic and engaging websites.',
         url: '',
     },
     {
-        num: '02',
+        title: 'Full-Stack Web Application Development',
+        desc: 'Proficient in both frontend and backend development, capable of building robust and scalable web applications. Skilled in JavaScript, Node.js, Express, MongoDB, and SQL databases. Adept at integrating APIs and ensuring seamless user experiences.',
+        url: '',
+    },
+    {
         title: 'Discord Bot Development',
-        desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab voluptas iure sequi commodi nam blanditiis exercitationem quibusdam vitae quas excepturi nihil nobis quisquam, minima quo maiores, unde distinctio animi iste.',
+        desc: 'Experienced in developing custom Discord bots to automate tasks, manage communities, and enhance user engagement. Proficient in JavaScript and Node.js, with knowledge of the Discord.js library to create feature-rich bots tailored to specific needs.',
         url: '',
     },
     {
-        num: '03',
-        title: 'Full-Stack App Development',
-        desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab voluptas iure sequi commodi nam blanditiis exercitationem quibusdam vitae quas excepturi nihil nobis quisquam, minima quo maiores, unde distinctio animi iste.',
+        title: 'Browser Extension Development',
+        desc: 'Expert in developing browser extensions to enhance web browser functionality and improve user experience. Skilled in JavaScript, HTML, and CSS, with experience in creating extensions for Chrome, Firefox, and other major browsers.',
         url: '',
     },
 ]
@@ -38,7 +40,7 @@ export default function Services() {
                             >
                                 <div className="flex w-full items-center justify-between">
                                     <div className="text-5xl font-extrabold transition-all duration-150 group-hover:text-accent-hover">
-                                        {service.num}
+                                        0{index}
                                     </div>
                                     <Link
                                         href={service.url}
