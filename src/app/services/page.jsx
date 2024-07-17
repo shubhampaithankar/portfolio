@@ -7,26 +7,27 @@ import { MotionDiv } from '@/components'
 export const services = [
     {
         title: 'Website Development',
-        desc: 'Specialized in creating responsive, user-friendly, and visually appealing websites using the latest web technologies. Experienced with HTML, CSS, JavaScript, and various frameworks like React and Angular to build dynamic and engaging websites.',
+        desc: 'Specialized in creating responsive, user-friendly, and visually appealing websites using the latest web technologies. Experienced with React and Angular to build dynamic and engaging websites.',
         url: '',
     },
     {
         title: 'Full-Stack Web Application Development',
-        desc: 'Proficient in both frontend and backend development, capable of building robust and scalable web applications. Skilled in JavaScript, Node.js, Express, MongoDB, and SQL databases. Adept at integrating APIs and ensuring seamless user experiences.',
+        desc: 'Proficient in both frontend and backend development, capable of building robust and scalable web applications. Adept at integrating APIs and ensuring seamless user experiences.',
         url: '',
     },
     {
         title: 'Discord Bot Development',
-        desc: 'Experienced in developing custom Discord bots to automate tasks, manage communities, and enhance user engagement. Proficient in JavaScript and Node.js, with knowledge of the Discord.js library to create feature-rich bots tailored to specific needs.',
+        desc: 'Experienced in developing custom Discord bots to automate tasks, manage communities, and enhance user engagement. Proficient with knowledge of the Discord.js library to create feature-rich bots.',
         url: '',
     },
     {
         title: 'Browser Extension Development',
-        desc: 'Expert in developing browser extensions to enhance web browser functionality and improve user experience. Skilled in JavaScript, HTML, and CSS, with experience in creating extensions for Chrome, Firefox, and other major browsers.',
+        desc: 'Expert in developing browser extensions to enhance web browser functionality and improve user experience. Skilled in creating extensions for Chrome, Firefox, and other major browsers.',
         url: '',
     },
 ]
 
+// todo: fix mapped div css
 export default function Services() {
     return (
         <section className="flex min-h-[80vh] flex-col justify-center py-12 xl:py-6">
@@ -40,7 +41,7 @@ export default function Services() {
                             >
                                 <div className="flex w-full items-center justify-between">
                                     <div className="text-5xl font-extrabold transition-all duration-150 group-hover:text-accent-hover">
-                                        0{index}
+                                        0{index + 1}
                                     </div>
                                     <Link
                                         href={service.url}
