@@ -16,7 +16,7 @@ export default async function Resume() {
         method: 'POST',
         headers: {
             accept: 'application/json:',
-            'X-WORKER-EXTRACTOR-ID': `${process.env.NEXT_PUBLIC_EXTRACTOR_ID}`,
+            'X-WORKER-EXTRACTOR-ID': `${process.env.EXTRACTOR_ID}`,
             'X-WORKER-IMAGE-URL': RESUME_URL,
             'X-WORKER-ENCODING': 'raw',
             'X-WORKER-PDF-DPI': '150',
@@ -24,7 +24,7 @@ export default async function Resume() {
             'X-WORKER-AUTO-ADJUST-IMAGE-SIZE': 'true',
             'X-WORKER-PROCESSING-MODE': 'per-page',
             'content-type': 'image/*',
-            'X-WORKER-TOKEN': `${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`,
+            'X-WORKER-TOKEN': `${process.env.ACCESS_TOKEN}`,
         },
         cache: 'force-cache',
     })
