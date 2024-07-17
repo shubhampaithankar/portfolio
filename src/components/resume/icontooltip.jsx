@@ -10,7 +10,7 @@ const iconLibraries = [
     { prefix: 'Si', icons: SiIcons },
 ]
 
-const capitalize = (s) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase()
+const capitalize = (s) => (s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : s)
 
 const skillIcons = {
     HTML: 'HTML5',
