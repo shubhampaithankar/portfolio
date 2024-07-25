@@ -63,18 +63,20 @@ const IconTooltip = ({ skill }) => {
     const IconComponent = findIconComponent(skill.description)
 
     return (
-        <TooltipProvider delayDuration={100}>
-            <Tooltip>
-                <TooltipTrigger className="group flex h-[125px] w-full items-center justify-center rounded-xl bg-[#232329]">
-                    <div className="text-6xl transition-all duration-300 group-hover:text-accent">
-                        {IconComponent ? <IconComponent /> : null}
-                    </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                    <p className="capitalize">{description}</p>
-                </TooltipContent>
-            </Tooltip>
-        </TooltipProvider>
+        IconComponent && (
+            <TooltipProvider delayDuration={100}>
+                <Tooltip>
+                    <TooltipTrigger className="group flex h-[125px] w-full items-center justify-center rounded-xl bg-[#232329]">
+                        <div className="text-6xl transition-all duration-300 group-hover:text-accent">
+                            <IconComponent />
+                        </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p className="capitalize">{description}</p>
+                    </TooltipContent>
+                </Tooltip>
+            </TooltipProvider>
+        )
     )
 }
 

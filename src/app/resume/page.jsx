@@ -118,11 +118,14 @@ export default async function Resume() {
                                     </div>
                                     <ScrollArea className="h-[600px]">
                                         <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 xl:gap-[30px]">
-                                            {resume.skills?.map((skill, index) => (
-                                                <li key={index}>
-                                                    <IconTooltip skill={skill} />
-                                                </li>
-                                            ))}
+                                            {resume.skills?.map(
+                                                (skill, index) =>
+                                                    IconTooltip && (
+                                                        <li key={index}>
+                                                            <IconTooltip skill={skill} />
+                                                        </li>
+                                                    ),
+                                            )}
                                         </ul>
                                     </ScrollArea>
                                 </div>
