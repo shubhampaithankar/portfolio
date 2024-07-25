@@ -61,8 +61,8 @@ export default async function Resume() {
                                     <div className="flex flex-col gap-[30px] text-center xl:text-left">
                                         <h3 className="text-4xl font-bold">Experience</h3>
                                         <p className="mx-auto max-w-[600px] text-white/60 xl:mx-0">
-                                            My professioanl experience that includes full-time
-                                            employment, internships and freelancing.
+                                            I have experience in these fields that includes
+                                            full-time employment, internships and freelancing.
                                         </p>
                                     </div>
                                     <ScrollArea className="h-[600px]">
@@ -104,7 +104,44 @@ export default async function Resume() {
                             </TabsContent>
                             {/* projects */}
                             <TabsContent value="projects" className="w-full">
-                                {/* Add your projects content here */}
+                                <div className="flex flex-col gap-[30px]">
+                                    <div className="flex flex-col gap-[30px] text-center xl:text-left">
+                                        <h3 className="text-4xl font-bold">Projects</h3>
+                                        <p className="mx-auto max-w-[600px] text-white/60 xl:mx-0">
+                                            I have worked on the following projects.
+                                        </p>
+                                    </div>
+                                    <ScrollArea className="h-[600px]">
+                                        <ul className="grid grid-cols-1 gap-[30px] lg:grid-cols-2">
+                                            {resume.projects?.map((project, index) => (
+                                                <li
+                                                    key={index}
+                                                    className="flex min-h-[400px] flex-col items-center gap-1 overflow-y-scroll rounded-xl bg-[#232329] px-10 py-6 lg:items-start"
+                                                >
+                                                    <h3 className="max-w-[260px] text-center text-xl lg:text-left">
+                                                        {project.project_title}
+                                                    </h3>
+                                                    <span className="text-accent">
+                                                        {project.tech_stack}
+                                                    </span>
+                                                    {splitSentence(project.project_description).map(
+                                                        (sentence, i) => (
+                                                            <div
+                                                                className="flex items-center justify-between gap-3"
+                                                                key={i}
+                                                            >
+                                                                {/* <span className="h-[6px] w-[6px] rounded bg-accent"></span>{' '} */}
+                                                                <p className="text-white/60">
+                                                                    {sentence}.
+                                                                </p>
+                                                            </div>
+                                                        ),
+                                                    )}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </ScrollArea>
+                                </div>
                             </TabsContent>
                             {/* skills */}
                             <TabsContent value="skills" className="w-full">
@@ -137,3 +174,6 @@ export default async function Resume() {
         </MotionDiv>
     )
 }
+
+const splitSentence = (text) =>
+    text ? text.split('.').filter((sentence) => sentence.trim().length > 0) : text
